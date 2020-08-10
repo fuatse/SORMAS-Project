@@ -71,6 +71,8 @@ public interface CaseFacade {
 
 	void setSampleAssociations(EventParticipantReferenceDto sourceEventParticipant, CaseReferenceDto cazeRef);
 
+	void setSampleAssociationsUnrelatedDisease(EventParticipantReferenceDto sourceEventParticipant, CaseReferenceDto cazeRef);
+
 	void validate(CaseDataDto dto) throws ValidationRuntimeException;
 
 	CaseReferenceDto getReferenceByUuid(String uuid);
