@@ -33,11 +33,9 @@ fi
 if [[ ${LINUX} = true ]]; then
 	ROOT_PREFIX=
 else
-#	ROOT_PREFIX=/c
-	ROOT_PREFIX=/d/Software/sormas
+	ROOT_PREFIX=/c
 fi
-#SORMAS2SORMAS_DIR=${ROOT_PREFIX}/opt/sormas2sormas
-SORMAS2SORMAS_DIR=${ROOT_PREFIX}/sormas2sormas
+SORMAS2SORMAS_DIR=${ROOT_PREFIX}/opt/sormas2sormas
 TRUSTSTORE_FILE_NAME=sormas2sormas.truststore.p12
 
 TRUSTSTORE_FILE=${SORMAS2SORMAS_DIR}/${TRUSTSTORE_FILE_NAME}
@@ -89,7 +87,9 @@ if [[ ${NEW_TRUSTSTORE} = true ]]; then
 fi
 else
   TEMP_FILE=${SORMAS2SORMAS_DIR}/tempcert.pem
+  # export existing certificates to temporary file
   openssl pkcs12 -in "${TRUSTSTORE_FILE}" -password pass:"${SORMAS_S2S_TRUSTSTORE_PASS}" -out ${TEMP_FILE}
+  # create new truststore with the new certificate and the certificates from the temporary file
   openssl pkcs12 -export -nokeys -out "${TRUSTSTORE_FILE}" -name "${CERT_NAME}" -password pass:"${SORMAS_S2S_TRUSTSTORE_PASS}" -in "${CRT_FILE}" -certfile ${TEMP_FILE}
   rm ${TEMP_FILE}
 fi
