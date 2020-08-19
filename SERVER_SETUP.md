@@ -65,7 +65,7 @@
   * Unzip the ZIP archive (e.g. into you download directory)
   * Open Git Bash and navigate to the setup sub-directory
 * Optional: Open ``server-setup.sh`` in a text editor to customize the install paths, database access and ports for the server. The default ports are 6080 (HTTP), 6081 (HTTPS) and 6048 (admin). **Important:** Do not change the name of the database user. The pre-defined name is used in the statements executed in the database.
-* Set up the database and a Payara domain for SORMAS by executing the setup script: ``sudo -s ./server-setup.sh`` Press enter whenever asked for it
+* Set up the database and a Payara domain for SORMAS by executing the setup script: ``sudo -s . ./server-setup.sh`` Press enter whenever asked for it
 * **IMPORTANT**: Make sure the script executed successfully. If anything goes wrong you need to fix the problem (or ask for help), then delete the created domain directory and re-execute the script.
 * **IMPORTANT**: Adjust the SORMAS configuration for your country in /opt/domains/sormas/sormas.properties
 * Adjust the logging configuration in ``/opt/domains/sormas/config/logback.xml`` based on your needs (e.g. configure and activate email appender)
@@ -242,8 +242,6 @@ To be able to communicate with other SORMAS instances, there are some additional
 up the certificate and the truststore. Please see the [related guide](GUIDE_CREATE_CERTIFICATE.md) for detailed instructions regarding
 SORMAS to SORMAS setup.
 <br/>
-*Note*: If the SORMAS installation has been customized, the install paths for the scripts ``generate-cert.sh`` and ``import-to-truststore.sh`` 
-will have to be adjusted accordingly with a text editor. 
 
 ## Troubleshooting
 

@@ -80,7 +80,8 @@ GENERATED_DIR=${ROOT_PREFIX}/opt/sormas/generated
 CUSTOM_DIR=${ROOT_PREFIX}/opt/sormas/custom
 PAYARA_HOME=${ROOT_PREFIX}/opt/payara5
 DOMAINS_HOME=${ROOT_PREFIX}/opt/domains
-SORMAS2SORMAS_DIR=${ROOT_PREFIX}/opt/sormas2sormas
+SORMAS2SORMAS_DIR=${ROOT_PREFIX}/opt/sormas/sormas2sormas
+export SORMAS2SORMAS_DIR
 
 DOMAIN_NAME=sormas
 PORT_BASE=6000
@@ -336,11 +337,7 @@ ${ASADMIN} create-custom-resource --restype java.util.Properties --factoryclass 
 
 cp sormas.properties "${DOMAIN_DIR}"
 SORMAS_PROPERTIES=${DOMAIN_DIR}/sormas.properties
-if [[ ${LINUX} = true ]]; then
-  export SORMAS_PROPERTIES
-else
-  setx SORMAS_PROPERTIES ${SORMAS_PROPERTIES}
-fi
+export SORMAS_PROPERTIES
 cp start-payara-sormas.sh "${DOMAIN_DIR}"
 cp stop-payara-sormas.sh "${DOMAIN_DIR}"
 cp logback.xml ${DOMAIN_DIR}/config/
@@ -413,4 +410,3 @@ if [[ ${DEV_SYSTEM} != true ]]; then
 	echo "  - Configure the apache web server according to the server setup guide"
 fi
 	echo "  - Execute the r-setup.sh file to enable disease network diagrams"
-  echo "  - To enable SORMAS to SORMAS communication, see the related guide and execute the generate-cert.sh and import-to-truststore.sh scripts"
