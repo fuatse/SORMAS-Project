@@ -50,7 +50,7 @@ fi
 
 if [ ! -f "${SERVER_LIST_FILE}" ]; then
   echo "${SERVER_LIST_FILE_NAME} not found. A new server list file will be created."
-  echo -e "SEP=," > "${SERVER_LIST_FILE}"
+  touch "${SERVER_LIST_FILE}"
 fi
 
 while [[ -z "${SORMAS_S2S_TRUSTSTORE_PASS}" ]]; do

@@ -84,7 +84,6 @@ openssl pkcs12 -export -inkey "${PEM_NAME}" -out "${P12_NAME}" -passin pass:"${S
 rm "${PEM_NAME}"
 
 echo "Generating server access data CSV"
-echo -e "SEP=," > "${CSV_NAME}"
 echo -e "\"${SORMAS_S2S_CERT_CN}\",\"${SORMAS_S2S_CERT_ORG}\",\n" > "${CSV_NAME}"
 
 #update properties
