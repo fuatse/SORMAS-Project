@@ -37,12 +37,20 @@ else
 fi
 SORMAS2SORMAS_DIR=${ROOT_PREFIX}/opt/sormas2sormas
 TRUSTSTORE_FILE_NAME=sormas2sormas.truststore.p12
+SERVER_LIST_FILE_NAME=server-access-data.csv
 
 TRUSTSTORE_FILE=${SORMAS2SORMAS_DIR}/${TRUSTSTORE_FILE_NAME}
+SERVER_LIST_FILE=${SORMAS2SORMAS_DIR}/${SERVER_LIST_FILE_NAME}
 NEW_TRUSTSTORE=false
+
 if [ ! -f "${TRUSTSTORE_FILE}" ]; then
   NEW_TRUSTSTORE=true
   echo "${TRUSTSTORE_FILE_NAME} not found. A new truststore file will be created."
+fi
+
+if [ ! -f "${SERVER_LIST_FILE}" ]; then
+  echo "${SERVER_LIST_FILE_NAME} not found. A new server list file will be created."
+  echo -e "SEP=," > "${SERVER_LIST_FILE}"
 fi
 
 while [[ -z "${SORMAS_S2S_TRUSTSTORE_PASS}" ]]; do

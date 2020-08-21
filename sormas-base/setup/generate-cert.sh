@@ -73,6 +73,7 @@ read -p "Press [Enter] to continue or [Ctrl+C] to cancel."
 PEM_NAME=${SORMAS2SORMAS_DIR}/sormas2sormas.privkey.pem
 P12_NAME=${SORMAS2SORMAS_DIR}/sormas2sormas.keystore.p12
 CRT_NAME=${SORMAS2SORMAS_DIR}/sormas2sormas.cert.crt
+CSV_NAME=${SORMAS2SORMAS_DIR}/server-access-data.csv
 
 # generate private key and self signed certificate
 openssl req -sha256 -newkey rsa:4096 -passout pass:"${SORMAS_S2S_CERT_PASS}" -keyout "${PEM_NAME}" -x509 -passin pass:"${SORMAS_S2S_CERT_PASS}" -days 1095 -subj "${CERT_SUBJ}" -out "${CRT_NAME}"
@@ -81,6 +82,10 @@ openssl req -sha256 -newkey rsa:4096 -passout pass:"${SORMAS_S2S_CERT_PASS}" -ke
 openssl pkcs12 -export -inkey "${PEM_NAME}" -out "${P12_NAME}" -passin pass:"${SORMAS_S2S_CERT_PASS}" -password pass:"${SORMAS_S2S_CERT_PASS}" -in "${CRT_NAME}"
 
 rm "${PEM_NAME}"
+
+echo "Generating server access data CSV"
+echo -e "SEP=," > "${CSV_NAME}"
+echo -e "\"${SORMAS_S2S_CERT_CN}\",\"${SORMAS_S2S_CERT_ORG}\",\n" > "${CSV_NAME}"
 
 #update properties
 if [[ -z ${SORMAS_PROPERTIES} ]]; then
